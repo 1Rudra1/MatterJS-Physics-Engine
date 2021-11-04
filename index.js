@@ -73,13 +73,23 @@ function draw() {
   drawBody(ground);
   
   drawMouse(mouseConstraint);
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text('Amount of Force: ' + amountForce, width/2, 50);
 }
 
-document.addEventListener("keydown", force);
+document.addEventListener("keyup", force);
 
 function force() {
     if(!forceApplied) {
-        Body.applyForce( dominoesArray[0], {x: dominoesArray[0].position.x, y: dominoesArray[0].position.y - 20}, {x: 0.025, y: 0});
+        Body.applyForce( dominoesArray[0], {x: dominoesArray[0].position.x, y: dominoesArray[0].position.y - 20}, {x: 0.025 * amountForce, y: 0});
         forceApplied = true;
     }
+}
+
+let amountForce = 1;
+document.addEventListener("keydown", addForce);
+
+function addForce() {
+    amountForce ++;
 }
